@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王梓衡｜个人作品集</title>
+<style>
+  :root {
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --grey: #f0f0f0;
+    --gold: #c9a96e;
+    --blue: #3b82f6;
+    --orange: #f59e0b;
+    --text: #222;
+    --text-light: #666;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Navigation Dots ── */
+  .nav-dots {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .nav-dots a {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transition: all 0.3s;
+    display: block;
+    position: relative;
+  }
+  .nav-dots a:hover, .nav-dots a.active { background: var(--white); transform: scale(1.4); }
+  .nav-dots a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: 12px;
+    color: var(--white);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .nav-dots a:hover::after { opacity: 1; }
+
+  /* ── Section Base ── */
+  .section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  /* ── SECTION 1: Cover ── */
+  #s1 {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%);
+    color: var(--white);
+  }
+  #s1 .container { display: flex; align-items: center; gap: 80px; }
+  .cover-left { flex: 0 0 42%; }
+  .cover-right { flex: 1; }
+  .cover-name {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .cover-line { width: 60px; height: 2px; background: var(--gold); margin-bottom: 28px; }
+  .cover-position {
+    font-size: 15px;
+    color: #bbb;
+    line-height: 1.9;
+    margin-bottom: 32px;
+  }
+  .cover-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .cover-tag {
+    font-size: 12px;
+    padding: 6px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    color: #ccc;
+    letter-spacing: 1px;
+  }
+  .cover-contact { font-size: 14px; color: #999; line-height: 2; }
+  .cover-contact span { color: #ccc; }
+  .cover-visual {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-visual::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  }
+  .cover-visual-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .cover-visual-text .icon { font-size: 48px; display: block; margin-bottom: 12px; }
+
+  /* ── SECTION 2: Skills Overview ── */
+  #s2 { background: var(--white); }
+  .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.8;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .skill-card {
+    background: var(--white);
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 36px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    border-color: #d0d0d0;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .skill-card:nth-child(1)::before { background: var(--gold); }
+  .skill-card:nth-child(2)::before { background: var(--blue); }
+  .skill-card:nth-child(3)::before { background: var(--orange); }
+  .skill-card:nth-child(4)::before { background: #10b981; }
+  .skill-card-icon { font-size: 36px; margin-bottom: 16px; }
+  .skill-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .skill-card p { font-size: 13px; color: var(--text-light); line-height: 1.8; }
+  .bottom-summary {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTION 3-6: Capability Detail ── */
+  #s3 { background: #f8f9fa; }
+  #s4 { background: var(--white); }
+  #s5 { background: #f8f9fa; }
+  #s6 { background: var(--white); }
+  .cap-header { text-align: center; margin-bottom: 56px; }
+  .cap-header .section-title { margin-bottom: 8px; }
+  .cap-header .cap-desc { font-size: 15px; color: var(--text-light); max-width: 680px; margin: 0 auto; line-height: 1.8; }
+  .cap-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 48px; }
+  .cap-tag {
+    font-size: 13px;
+    padding: 8px 20px;
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 24px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .cap-results { margin-bottom: 48px; }
+  .cap-results h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; padding-left: 0; }
+  .cap-results ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cap-results li {
+    font-size: 14px;
+    color: var(--text);
+    padding: 12px 16px;
+    background: var(--white);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  #s4 .cap-results li { border-left-color: var(--blue); }
+  #s5 .cap-results li { border-left-color: var(--orange); }
+  #s6 .cap-results li { border-left-color: #10b981; }
+
+  .media-grid { display: grid; gap: 16px; margin-bottom: 40px; }
+  .media-grid.col3 { grid-template-columns: repeat(3, 1fr); }
+  .media-grid.col4 { grid-template-columns: repeat(4, 1fr); }
+  .media-grid.col2 { grid-template-columns: repeat(2, 1fr); }
+  .media-placeholder {
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, #e8ecf1 0%, #dce1e8 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 13px;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.3s;
+  }
+  .media-placeholder:hover { opacity: 0.8; }
+  .media-placeholder .ph-icon { font-size: 32px; }
+  .media-placeholder.tall { aspect-ratio: 3/4; }
+  .media-placeholder.wide { aspect-ratio: 16/7; }
+  .media-placeholder.square { aspect-ratio: 1/1; }
+
+  .qr-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    padding: 32px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+  }
+  .qr-placeholder {
+    width: 100px; height: 100px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .qr-label { font-size: 15px; color: var(--text); font-weight: 500; }
+
+  .data-cards {
+    display: flex;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .data-card {
+    flex: 1;
+    text-align: center;
+    padding: 28px 20px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+  }
+  .data-card .num {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  .data-card .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  #s4 .data-card .num { color: var(--blue); }
+  #s5 .data-card .num { color: var(--orange); }
+
+  .page-quote {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTION 7: Tools ── */
+  #s7 { background: #f8f9fa; }
+  .tools-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+  .tools-table td {
+    padding: 20px 28px;
+    font-size: 15px;
+  }
+  .tools-table tr td:first-child {
+    width: 140px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  .tools-table tr {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .tools-table tbody tr {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border-radius: 10px;
+  }
+  .tools-table td:first-child { border-radius: 10px 0 0 10px; }
+  .tools-table td:last-child { border-radius: 0 10px 10px 0; color: var(--text-light); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .media-grid.col3, .media-grid.col4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    #s1 .container { flex-direction: column; gap: 40px; }
+    .cover-left { flex: none; text-align: center; }
+    .cover-line { margin: 0 auto 28px; }
+    .cover-name { font-size: 42px; letter-spacing: 4px; }
+    .section { padding: 60px 0; }
+    .container { padding: 0 24px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .media-grid.col3, .media-grid.col4, .media-grid.col2 { grid-template-columns: 1fr 1fr; }
+    .cap-results ul { grid-template-columns: 1fr; }
+    .section-title { font-size: 28px; }
+    .data-cards { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav Dots -->
+<div class="nav-dots" id="navDots">
+  <a href="#s1" data-label="封面"></a>
+  <a href="#s2" data-label="能力总览"></a>
+  <a href="#s3" data-label="AIGC视频"></a>
+  <a href="#s4" data-label="新媒体运营"></a>
+  <a href="#s5" data-label="直播运营"></a>
+  <a href="#s6" data-label="视觉设计"></a>
+  <a href="#s7" data-label="软件工具"></a>
+</div>
+
+<!-- ═══════════ SECTION 1: 封面 ═══════════ -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="cover-left">
+      <div class="cover-name">王梓衡</div>
+      <div class="cover-subtitle">个人作品集</div>
+      <div class="cover-line"></div>
+      <div class="cover-position">
+        新媒体运营 / AIGC视频创作 / 直播运营 / 视觉设计<br>
+        具备内容策划、AI视频制作、短视频运营、直播搭建和视觉设计综合能力。
+      </div>
+      <div class="cover-tags">
+        <span class="cover-tag">AIGC视频创作</span>
+        <span class="cover-tag">短视频运营</span>
+        <span class="cover-tag">直播间搭建</span>
+        <span class="cover-tag">账号矩阵运营</span>
+        <span class="cover-tag">视觉设计</span>
+      </div>
+      <div class="cover-contact">
+        求职方向：<span>影视媒体 / 新媒体运营 / AIGC内容创作 / 直播运营</span><br>
+        电话 / 微信：<span>15653930286</span><br>
+        邮箱：<span>wangziheng0119@outlook.com</span>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-visual" style="background-image: url('剧情分镜图_00001_tvebj_1774764577.png'); background-size: cover; background-position: center 30%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 2: 个人能力总览 ═══════════ -->
+<section class="section" id="s2">
+  <div class="container">
+    <div class="section-title">个人能力总览</div>
+    <div class="section-subtitle">
+      围绕品牌传播与销售转化，形成从内容策划、AIGC视频制作、直播运营到视觉设计落地的综合执行能力。
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🎥</div>
+        <h3>AIGC视频创作</h3>
+        <p>剧情策划、分镜脚本、AI图片与视频生成、视频剪辑、音效设计、成片包装</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📱</div>
+        <h3>新媒体运营</h3>
+        <p>抖音账号运营、短视频策划、矩阵账号搭建、内容选题、数据复盘、本地生活运营</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📡</div>
+        <h3>直播运营</h3>
+        <p>直播间搭建、设备调试、主播话术、流程SOP、数据复盘、同城直播运营</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🎨</div>
+        <h3>视觉设计</h3>
+        <p>平面设计、电商详情页、文化墙设计、产品修图、线下物料落地与施工对接</p>
+      </div>
+    </div>
+    <div class="bottom-summary">
+      我的优势是能够同时完成内容策划、视觉制作、视频产出和运营执行。
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 3: AIGC视频创作能力 ═══════════ -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="cap-header">
+      <div class="section-title">AIGC视频创作能力</div>
+      <p class="cap-desc">掌握AIGC视频创作流程，能够独立完成从创意构思到视频成片的内容制作。</p>
+    </div>
+
+    <div class="cap-tags">
+      <span class="cap-tag">剧情大纲</span>
+      <span class="cap-tag">分镜脚本</span>
+      <span class="cap-tag">AI图片生成</span>
+      <span class="cap-tag">AI视频生成</span>
+      <span class="cap-tag">视频剪辑</span>
+      <span class="cap-tag">音效设计</span>
+      <span class="cap-tag">成片包装</span>
+    </div>
+
+    <div class="cap-results">
+      <h3>▎代表成果</h3>
+      <ul>
+        <li>使用AIGC技术制作婚礼情感类视频内容</li>
+        <li>单条AIGC婚礼视频制作成本约100元</li>
+        <li>完成从剧情、分镜、画面生成到剪辑包装的完整流程</li>
+        <li>将AIGC视频用于婚礼酒店宣传、销售谈单和朋友圈展示</li>
+      </ul>
+    </div>
+
+    <!-- 图片展示区 -->
+    <div class="media-grid col3">
+      <img src="镜头2.png" alt="AI视频截图1" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="镜头3.png" alt="AI视频截图2" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="剧情分镜图_00001_tvebj_1774764577.png" alt="AI视频截图3" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+    </div>
+    <div class="media-grid col2">
+      <img src="微信图片_20260525184422_507_28.jpg" alt="分镜图截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="ec91eda239f997493b80df31fee22326.jpg" alt="视频成片截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+    </div>
+
+    <div class="qr-row">
+      <img src="349ec9bfedd6097c6b96a5e9450e6909.png" alt="完整视频二维码" style="width:100px; height:100px; border-radius:8px;">
+      <div class="qr-label">扫码查看AIGC婚礼情感视频成片合集</div>
+    </div>
+
+    <p class="page-quote">能够根据宣传需求完成AIGC视频创作，将AI图片、AI视频、剪辑包装结合起来，形成完整的视频内容。</p>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 4: 短视频与新媒体运营能力 ═══════════ -->
+<section class="section" id="s4">
+  <div class="container">
+    <div class="cap-header">
+      <div class="section-title">短视频与新媒体运营能力</div>
+      <p class="cap-desc">具备短视频内容策划、账号包装、矩阵账号运营和数据复盘能力，了解本地生活行业内容传播方式。</p>
+    </div>
+
+    <div class="cap-tags">
+      <span class="cap-tag">抖音账号运营</span>
+      <span class="cap-tag">短视频选题</span>
+      <span class="cap-tag">内容拍摄</span>
+      <span class="cap-tag">视频剪辑</span>
+      <span class="cap-tag">账号包装</span>
+      <span class="cap-tag">数据复盘</span>
+      <span class="cap-tag">矩阵账号运营</span>
+    </div>
+
+    <div class="cap-results">
+      <h3>▎代表成果</h3>
+      <ul>
+        <li>参与鲁伯特林顿公司抖音等平台账号运营</li>
+        <li>参与打造千万播放量视频内容</li>
+        <li>参与销售部矩阵账号运营</li>
+        <li>协助账号获得稳定有效客户来源</li>
+        <li>具备账号包装、内容选题和运营复盘能力</li>
+      </ul>
+    </div>
+
+    <div class="media-grid col3">
+      <img src="微信图片_20260525172816_482_28(1).png" alt="抖音主页截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="7a9dca7434f5371c7cfd702a82a53635.png" alt="爆款视频数据截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="微信图片_20260525172813_480_28.png" alt="视频封面截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+    </div>
+    <div class="media-grid col2">
+      <img src="51fdbc45cf5dff1badbe64e31464baa2.png" alt="内容选题表截图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+      <img src="微信图片_20260525172823_486_28.png" alt="账号矩阵示意图" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:cover;">
+    </div>
+
+    <div class="qr-row">
+      <img src="ebcad8f4bcd7aaa4cd3b2482de66d19f.png" alt="短视频二维码" style="width:100px; height:100px; border-radius:8px;">
+      <div class="qr-label">扫码查看代表短视频作品</div>
+    </div>
+
+    <p class="page-quote">能够围绕账号定位进行内容策划和运营执行，通过短视频内容提升账号曝光和客户获取能力。</p>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 5: 直播运营能力 ═══════════ -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="cap-header">
+      <div class="section-title">直播运营与直播间搭建能力</div>
+      <p class="cap-desc">了解直播间搭建、直播设备调试、主播话术、直播流程和数据复盘，具备从0到1参与直播间搭建的经验。</p>
+    </div>
+
+    <div class="cap-tags">
+      <span class="cap-tag">直播间搭建</span>
+      <span class="cap-tag">设备调试</span>
+      <span class="cap-tag">直播布景</span>
+      <span class="cap-tag">主播话术</span>
+      <span class="cap-tag">直播流程</span>
+      <span class="cap-tag">直播复盘</span>
+      <span class="cap-tag">同城直播运营</span>
+    </div>
+
+    <div class="data-cards">
+      <div class="data-card">
+        <div class="num">≈4000<span style="font-size:20px">人</span></div>
+        <div class="label">直播间峰值<br>同时在线人数</div>
+      </div>
+      <div class="data-card">
+        <div class="num">50<span style="font-size:20px">万+</span></div>
+        <div class="label">单场直播<br>销售额</div>
+      </div>
+      <div class="data-card">
+        <div class="num">0→1</div>
+        <div class="label">直播间<br>冷启动搭建</div>
+      </div>
+    </div>
+
+    <div class="cap-results">
+      <h3>▎代表成果</h3>
+      <ul>
+        <li>参与搭建鲁伯特林顿国际宴会中心官方同城直播间</li>
+        <li>参与完成直播间从0到1启动</li>
+        <li>直播间峰值约4000人同时在线</li>
+        <li>单场直播销售额超过50万元</li>
+        <li>具备直播场景搭建、流程执行和数据复盘经验</li>
+      </ul>
+    </div>
+
+    <div class="media-grid col3">
+      <img src="微信图片_20260525164024_478_28.jpg" alt="直播间现场照片1" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+      <img src="微信图片_20260525163954_477_28.jpg" alt="直播间现场照片2" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+      <img src="7183c7379ad8c1e5e31b57339f434c85.jpg" alt="直播后台数据截图" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+    </div>
+    <div class="media-grid col3">
+      <img src="14bc4559d203edb0e5a47307ec89f5bf.jpg" alt="直播设备/数据截图" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+      <img src="0a27015807317f6b63a833a9cd8351ea.png" alt="主播话术文档截图" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+      <img src="0bfbf1bc53c40b2a6febf7f3f21ff5bb.jpg" alt="直播搭建截图" style="width:100%; border-radius:8px; aspect-ratio:3/4; object-fit:cover;">
+    </div>
+
+    <p class="page-quote">能够参与直播间前期搭建、直播流程设计和现场执行，配合账号运营完成直播曝光和销售转化。</p>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 6: 视觉设计能力 ═══════════ -->
+<section class="section" id="s6">
+  <div class="container">
+    <div class="cap-header">
+      <div class="section-title">视觉设计与项目落地能力</div>
+      <p class="cap-desc">具备平面设计、电商视觉、文化墙设计和线下物料落地能力，能够完成从设计稿到成品交付的基础执行。</p>
+    </div>
+
+    <div class="cap-tags">
+      <span class="cap-tag">PS</span>
+      <span class="cap-tag">AI</span>
+      <span class="cap-tag">电商详情页</span>
+      <span class="cap-tag">产品修图</span>
+      <span class="cap-tag">文化墙设计</span>
+      <span class="cap-tag">宣传物料</span>
+      <span class="cap-tag">施工对接</span>
+    </div>
+
+    <div class="cap-results">
+      <h3>▎代表成果</h3>
+      <ul>
+        <li>参与山东沂水农村商业银行总部大楼文化墙设计项目</li>
+        <li>完成文化墙、宣传物料、电商详情页等视觉设计内容</li>
+        <li>具备产品摄影、后期修图和详情页制作经验</li>
+        <li>参与线下设计项目的施工对接、安装指导和验收工作</li>
+        <li>能够完成从线上视觉设计到线下项目落地的基础执行</li>
+      </ul>
+    </div>
+
+    <div class="media-grid col3">
+      <img src="c598fb8c7f4988e2a254d4b9c12a2e3b.jpg" alt="案例作品" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:contain; background:#f5f5f5;">
+      <img src="ce58dc3188a57299e1c86e3fb8389cc9.jpg" alt="案例作品" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:contain; background:#f5f5f5;">
+      <img src="手撕鸡.png" alt="产品摄影作品" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:contain; background:#f5f5f5;">
+    </div>
+    <div class="media-grid col2">
+      <img src="菜单四折页1199餐标正面 (2).png" alt="菜单四折页正面" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:contain; background:#f5f5f5;">
+      <img src="菜单四折页1199餐标背面.png" alt="菜单四折页背面" style="width:100%; border-radius:8px; aspect-ratio:16/10; object-fit:contain; background:#f5f5f5;">
+    </div>
+
+    <p class="page-quote">能够根据品牌和传播需求完成平面视觉设计，并参与线下制作、安装和验收等执行环节。</p>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 7: 软件与工具能力 ═══════════ -->
+<section class="section" id="s7">
+  <div class="container">
+    <div class="section-title">软件与工具能力</div>
+    <div class="section-subtitle">能够根据不同工作需求，灵活使用设计、剪辑、AI和运营工具完成内容生产。</div>
+
+    <table class="tools-table">
+      <tbody>
+        <tr>
+          <td>🎨 平面设计</td>
+          <td>Photoshop &nbsp;/&nbsp; Illustrator</td>
+        </tr>
+        <tr>
+          <td>🎬 视频剪辑</td>
+          <td>Premiere &nbsp;/&nbsp; DaVinci Resolve</td>
+        </tr>
+        <tr>
+          <td>🤖 AIGC创作</td>
+          <td>AI 图片生成 &nbsp;/&nbsp; AI 视频生成 &nbsp;/&nbsp; AI 文案辅助工具</td>
+        </tr>
+        <tr>
+          <td>📱 新媒体运营</td>
+          <td>抖音 &nbsp;/&nbsp; 视频号 &nbsp;/&nbsp; 美团 &nbsp;/&nbsp; 门店运营平台</td>
+        </tr>
+        <tr>
+          <td>📊 办公与协作</td>
+          <td>表格 &nbsp;/&nbsp; PPT &nbsp;/&nbsp; 文档 &nbsp;/&nbsp; 基础数据整理</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<script>
+  // Navigation dot highlighting
+  const sections = document.querySelectorAll('.section');
+  const dots = document.querySelectorAll('.nav-dots a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const target = document.querySelector(`.nav-dots a[href="#${entry.target.id}"]`);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
